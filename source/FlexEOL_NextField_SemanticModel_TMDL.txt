@@ -1,0 +1,810 @@
+/////////////////////////////////////////////////////////////////////////////////
+// FlexEOL_NextField - Starter TMDL Semantic Model Skeleton
+// Enabled Energy | NextField  -  Flexential EOL / Site Risk Evaluation Tool v3.0
+//
+// PURPOSE
+//   Hand this file to the Power BI Modeling MCP server (Agent Skills for Power BI)
+//   as a starting scaffold. It encodes the REAL column names extracted from the
+//   workbook (33 sheets, 193-col asset DB, 9,070 equipment rows) and the exact
+//   9-criteria weighted scoring model from the 'Criteria' tab.
+//
+// SOURCE OF TRUTH (verified from the .xlsx, 2026-09-03)
+//   Fact_AssetScore      <- 'Output- Asset Scores'        (header row 16, 22 cols)
+//   Fact_SiteRisk        <- 'Output- Site Risk Scores' +  'Output- Site Scores'
+//   Fact_CapitalForecast <- 'Output- Budget Forecasting'  (Year 1..10)
+//   Dim_Asset            <- 'Entry- Eq Database'          (header row 21, 193 cols)
+//   Dim_Site             <- 'Entry- Site Data'            (header row 20, 31 cols)
+//   Dim_ScoringWeights   <- 'Criteria'                    (rows 16-24)
+//   Dim_RiskWeights      <- 'Risk Eval Weighting'
+//
+// CRITERIA WEIGHTS (exact, from 'Criteria' tab)
+//   Criticality 100 | Operating Issues 88.888..| Redundancy 77.777..
+//   Service & Support 66.666.. | Age 55.555.. | Site Business Priority 44.444..
+//   Efficiency 33.333.. | Maintenance Cost 22.222.. | Loading 11.111..
+//
+// COST MODEL (from 'Costs and Scoring' tab)
+//   ROM scaling uses "Rule of Six-Tenths" family but the workbook's actual
+//   "Exponent Applied for Size Variance" = 0.8 for ALL equipment classes.
+//   CostB = CostA * (SizeB / SizeA) ^ 0.8
+//
+// NOTE
+//   Mode is set to import for the PoC seed from the workbook. Switch tables to
+//   Direct Lake once the gold Lakehouse tables exist. Replace M partition
+//   expressions with Lakehouse/SQL sources at that point.
+/////////////////////////////////////////////////////////////////////////////////
+
+model FlexEOL_NextField
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+
+/////////////////////////////////////////////////////////////////////////////////
+// FACT TABLES
+/////////////////////////////////////////////////////////////////////////////////
+
+table Fact_AssetScore
+	lineageTag: fact-assetscore-0001
+
+	measure 'Overall Score (avg)' = AVERAGE(Fact_AssetScore[OverallScore])
+		formatString: 0.0
+		displayFolder: 1 Scores
+
+	/// Weighted Overall Score rebuilt from the 9 sub-scores using the tunable
+	/// weights in Dim_ScoringWeights. Use this to prove the workbook math is
+	/// reproducible; swap to the precomputed [OverallScore] for performance.
+	measure 'Overall Score (weighted, dynamic)' = ```
+			VAR w = Dim_ScoringWeights
+			VAR wCrit = MAXX(FILTER(w, w[Criteria] = "Criticality"), w[Weighting])
+			VAR wOps  = MAXX(FILTER(w, w[Criteria] = "Operating Issues"), w[Weighting])
+			VAR wRed  = MAXX(FILTER(w, w[Criteria] = "Redundancy"), w[Weighting])
+			VAR wSvc  = MAXX(FILTER(w, w[Criteria] = "Service and Support"), w[Weighting])
+			VAR wAge  = MAXX(FILTER(w, w[Criteria] = "Age"), w[Weighting])
+			VAR wSbp  = MAXX(FILTER(w, w[Criteria] = "Site Business Priority"), w[Weighting])
+			VAR wEff  = MAXX(FILTER(w, w[Criteria] = "Efficiency"), w[Weighting])
+			VAR wMnt  = MAXX(FILTER(w, w[Criteria] = "Maintenance Cost"), w[Weighting])
+			VAR wLod  = MAXX(FILTER(w, w[Criteria] = "Loading / Equipment Taxing"), w[Weighting])
+			VAR wTot  = wCrit + wOps + wRed + wSvc + wAge + wSbp + wEff + wMnt + wLod
+			RETURN
+			DIVIDE(
+			    SUMX(
+			        Fact_AssetScore,
+			          Fact_AssetScore[EqCriticality]        * wCrit
+			        + Fact_AssetScore[EqOperatingIssues]    * wOps
+			        + Fact_AssetScore[EqRedundancy]         * wRed
+			        + Fact_AssetScore[EqServiceAndSupport]  * wSvc
+			        + Fact_AssetScore[EqAge]                * wAge
+			        + Fact_AssetScore[SiteBusinessPriority] * wSbp
+			        + Fact_AssetScore[EqEfficiency]         * wEff
+			        + Fact_AssetScore[EqMainCost]           * wMnt
+			        + Fact_AssetScore[EqLoading]            * wLod
+			    ),
+			    COUNTROWS(Fact_AssetScore) * wTot
+			)
+			```
+		formatString: 0.0
+		displayFolder: 1 Scores
+
+	measure 'Asset Count' = DISTINCTCOUNT(Fact_AssetScore[AssetId])
+		formatString: #,0
+		displayFolder: 0 Counts
+
+	/// Replacement-threshold parameter: workbook flags score >= 50 as replace-now.
+	measure 'Assets At/Over Threshold' = ```
+			VAR t = [Replacement Threshold Value]
+			RETURN CALCULATE([Asset Count], Fact_AssetScore[OverallScore] >= t)
+			```
+		formatString: #,0
+		displayFolder: 0 Counts
+
+	measure 'ROM Replacement Cost ($)' = SUM(Fact_AssetScore[ROMReplacementCost])
+		formatString: \$#,0
+		displayFolder: 2 Cost
+
+	measure 'ROM Cost in Budget Year ($)' = SUM(Fact_AssetScore[ROMCostInBudgetYear])
+		formatString: \$#,0
+		displayFolder: 2 Cost
+
+	column AssetId
+		dataType: string
+		sourceColumn: AssetId
+		summarizeBy: none
+
+	column Name
+		dataType: string
+		sourceColumn: Name
+		summarizeBy: none
+
+	column SerialNo
+		dataType: string
+		sourceColumn: SerialNo
+		summarizeBy: none
+
+	column Make
+		dataType: string
+		sourceColumn: Make
+		summarizeBy: none
+
+	column Model
+		dataType: string
+		sourceColumn: Model
+		summarizeBy: none
+
+	column SiteNo
+		dataType: string
+		sourceColumn: SiteNo
+		summarizeBy: none
+
+	column SiteName
+		dataType: string
+		sourceColumn: SiteName
+		summarizeBy: none
+
+	column EqCategory
+		dataType: string
+		sourceColumn: EqCategory
+		summarizeBy: none
+
+	column OverallScore
+		dataType: double
+		sourceColumn: OverallScore
+		summarizeBy: none
+
+	column EqCriticality
+		dataType: double
+		sourceColumn: EqCriticality
+		summarizeBy: none
+
+	column EqOperatingIssues
+		dataType: double
+		sourceColumn: EqOperatingIssues
+		summarizeBy: none
+
+	column EqRedundancy
+		dataType: double
+		sourceColumn: EqRedundancy
+		summarizeBy: none
+
+	column EqServiceAndSupport
+		dataType: double
+		sourceColumn: EqServiceAndSupport
+		summarizeBy: none
+
+	column EqAge
+		dataType: double
+		sourceColumn: EqAge
+		summarizeBy: none
+
+	column SiteBusinessPriority
+		dataType: double
+		sourceColumn: SiteBusinessPriority
+		summarizeBy: none
+
+	column EqEfficiency
+		dataType: double
+		sourceColumn: EqEfficiency
+		summarizeBy: none
+
+	column EqMainCost
+		dataType: double
+		sourceColumn: EqMainCost
+		summarizeBy: none
+
+	column EqLoading
+		dataType: double
+		sourceColumn: EqLoading
+		summarizeBy: none
+
+	column ROMReplacementCost
+		dataType: double
+		sourceColumn: ROMReplacementCost
+		summarizeBy: sum
+		formatString: \$#,0
+
+	column BudgetYear
+		dataType: int64
+		sourceColumn: BudgetYear
+		summarizeBy: none
+
+	column ROMCostInBudgetYear
+		dataType: double
+		sourceColumn: ROMCostInBudgetYear
+		summarizeBy: sum
+		formatString: \$#,0
+
+	partition Fact_AssetScore = m
+		mode: import
+		source = ```
+				// PoC seed from workbook. Header at row 16; data begins row 17.
+				let
+				    Src = Excel.Workbook(File.Contents("Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx"), null, true),
+				    Sheet = Src{[Item="Output- Asset Scores",Kind="Sheet"]}[Data],
+				    Promoted = Table.PromoteHeaders(Table.Skip(Sheet, 15), [PromoteAllScalars=true])
+				    // TODO: rename headers to model column names; set types; filter blank AssetId
+				in
+				    Promoted
+				```
+
+
+table Fact_SiteRisk
+	lineageTag: fact-siterisk-0002
+
+	measure 'Site Risk Score (avg)' = AVERAGE(Fact_SiteRisk[SiteRiskScore])
+		formatString: 0.00
+		displayFolder: 1 Scores
+
+	/// Workbook rule from 'Output- Site Risk Scores': items scoring >= 7.0 are
+	/// treated as SPOFs. Threshold slicer default = 7 in the source dashboard.
+	measure '# Items >= Threshold' = ```
+			VAR t = [Risk Threshold Value]
+			RETURN CALCULATE(COUNTROWS(Fact_SiteRisk), Fact_SiteRisk[CategoryRiskScore] >= t)
+			```
+		formatString: #,0
+		displayFolder: 0 Counts
+
+	measure 'Site Count' = DISTINCTCOUNT(Fact_SiteRisk[SiteNo])
+		formatString: #,0
+		displayFolder: 0 Counts
+
+	column SiteNo
+		dataType: string
+		sourceColumn: SiteNo
+		summarizeBy: none
+
+	column EqCategory
+		dataType: string
+		sourceColumn: EqCategory
+		summarizeBy: none
+
+	/// Unpivoted from the transposed 'Output- Site Risk Scores' (sites x category).
+	column CategoryRiskScore
+		dataType: double
+		sourceColumn: CategoryRiskScore
+		summarizeBy: none
+
+	column SiteRiskScore
+		dataType: double
+		sourceColumn: SiteRiskScore
+		summarizeBy: none
+
+	column IsSPOF
+		dataType: boolean
+		sourceColumn: IsSPOF
+		summarizeBy: none
+
+	partition Fact_SiteRisk = m
+		mode: import
+		source = ```
+				// Requires UNPIVOT: source stores sites across columns (transposed).
+				// In Fabric this is done in the Lakehouse notebook (silver layer).
+				let
+				    Src = Excel.Workbook(File.Contents("Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx"), null, true),
+				    Sheet = Src{[Item="Output- Site Risk Scores",Kind="Sheet"]}[Data]
+				    // TODO: unpivot category columns -> [EqCategory],[CategoryRiskScore]; derive IsSPOF = CategoryRiskScore >= 7
+				in
+				    Sheet
+				```
+
+
+table Fact_CapitalForecast
+	lineageTag: fact-capitalforecast-0003
+
+	measure 'Forecast Budget ($)' = SUM(Fact_CapitalForecast[ForecastBudget])
+		formatString: \$#,0
+		displayFolder: 2 Cost
+
+	measure 'Forecast Budget (10yr total $)' =
+			CALCULATE([Forecast Budget ($)], REMOVEFILTERS(Dim_Date))
+		formatString: \$#,0
+		displayFolder: 2 Cost
+
+	column AssetId
+		dataType: string
+		sourceColumn: AssetId
+		summarizeBy: none
+
+	column SiteNo
+		dataType: string
+		sourceColumn: SiteNo
+		summarizeBy: none
+
+	column ForecastYear
+		dataType: int64
+		sourceColumn: ForecastYear
+		summarizeBy: none
+
+	column ForecastBudget
+		dataType: double
+		sourceColumn: ForecastBudget
+		summarizeBy: sum
+		formatString: \$#,0
+
+	/// -50 / 40-30 / 30-20 / 20 / +1 Redundancy band shown in the source stacked column.
+	column CurrentEquipmentScoreBand
+		dataType: string
+		sourceColumn: CurrentEquipmentScoreBand
+		summarizeBy: none
+
+	partition Fact_CapitalForecast = m
+		mode: import
+		source = ```
+				// 'Output- Budget Forecasting' stores Year 1..10 across columns; unpivot to rows.
+				let
+				    Src = Excel.Workbook(File.Contents("Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx"), null, true),
+				    Sheet = Src{[Item="Output- Budget Forecasting",Kind="Sheet"]}[Data]
+				    // TODO: unpivot Year 1..10 -> [ForecastYear],[ForecastBudget]
+				in
+				    Sheet
+				```
+
+
+/////////////////////////////////////////////////////////////////////////////////
+// DIMENSION TABLES
+/////////////////////////////////////////////////////////////////////////////////
+
+table Dim_Asset
+	lineageTag: dim-asset-0100
+
+	/// From 'Entry- Eq Database' (193 populated cols). Only the analytically
+	/// useful subset is modeled here; extend as needed for the Asset Record.
+	column AssetId
+		dataType: string
+		isKey
+		sourceColumn: AssetId
+		summarizeBy: none
+
+	column CategoryName
+		dataType: string
+		sourceColumn: CategoryName
+		summarizeBy: none
+
+	column Name
+		dataType: string
+		sourceColumn: Name
+		summarizeBy: none
+
+	column SerialNo
+		dataType: string
+		sourceColumn: SerialNo
+		summarizeBy: none
+
+	column Make
+		dataType: string
+		sourceColumn: Make
+		summarizeBy: none
+
+	column Model
+		dataType: string
+		sourceColumn: Model
+		summarizeBy: none
+
+	/// Enables asset genealogy (UPS -> battery cabinet, generator -> breaker/tank).
+	column ParentAssetId
+		dataType: string
+		sourceColumn: ParentAssetId
+		summarizeBy: none
+
+	column ParentAssetName
+		dataType: string
+		sourceColumn: ParentAssetName
+		summarizeBy: none
+
+	column LocationPath
+		dataType: string
+		sourceColumn: LocationPath
+		summarizeBy: none
+
+	column AssetConditionName
+		dataType: string
+		sourceColumn: AssetConditionName
+		summarizeBy: none
+
+	column AssetStatusName
+		dataType: string
+		sourceColumn: AssetStatusName
+		summarizeBy: none
+
+	column CriticalityName
+		dataType: string
+		sourceColumn: CriticalityName
+		summarizeBy: none
+
+	column PurchasePrice
+		dataType: double
+		sourceColumn: PurchasePrice
+		summarizeBy: none
+		formatString: \$#,0
+
+	column PurchaseDate
+		dataType: dateTime
+		sourceColumn: PurchaseDate
+		summarizeBy: none
+		formatString: yyyy-mm-dd
+
+	column LifeTime
+		dataType: double
+		sourceColumn: LifeTime
+		summarizeBy: none
+
+	column ReplacementCost
+		dataType: double
+		sourceColumn: ReplacementCost
+		summarizeBy: none
+		formatString: \$#,0
+
+	column EstimatedReplacementDate
+		dataType: dateTime
+		sourceColumn: EstimatedReplacementDate
+		summarizeBy: none
+		formatString: yyyy-mm-dd
+
+	column ManufactureOn
+		dataType: dateTime
+		sourceColumn: ManufactureOn
+		summarizeBy: none
+		formatString: yyyy-mm-dd
+
+	column WarrantyExpirationDate
+		dataType: dateTime
+		sourceColumn: WarrantyExpirationDate
+		summarizeBy: none
+		formatString: yyyy-mm-dd
+
+	column TotalWorkOrderCost
+		dataType: double
+		sourceColumn: TotalWorkOrderCost
+		summarizeBy: none
+		formatString: \$#,0
+
+	column TotalDowntime
+		dataType: double
+		sourceColumn: TotalDowntime
+		summarizeBy: none
+
+	partition Dim_Asset = m
+		mode: import
+		source = ```
+				// 'Entry- Eq Database' header at row 21; data begins row 22 (~9,070 rows).
+				let
+				    Src = Excel.Workbook(File.Contents("Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx"), null, true),
+				    Sheet = Src{[Item="Entry- Eq Database",Kind="Sheet"]}[Data],
+				    Promoted = Table.PromoteHeaders(Table.Skip(Sheet, 20), [PromoteAllScalars=true])
+				    // TODO: keep required cols; set types; filter blank AssetId
+				in
+				    Promoted
+				```
+
+
+table Dim_Site
+	lineageTag: dim-site-0200
+
+	/// From 'Entry- Site Data' (header row 20). 70 sites in the source file.
+	column SiteNo
+		dataType: string
+		isKey
+		sourceColumn: SiteNo
+		summarizeBy: none
+
+	column SiteName
+		dataType: string
+		sourceColumn: SiteName
+		summarizeBy: none
+
+	column Ownership
+		dataType: string
+		sourceColumn: Ownership
+		summarizeBy: none
+
+	/// Maintain / Activate / Growth / Hyper Growth
+	column AssetClass
+		dataType: string
+		sourceColumn: AssetClass
+		summarizeBy: none
+
+	column EBITDA
+		dataType: double
+		sourceColumn: EBITDA
+		summarizeBy: none
+		formatString: \$#,0
+
+	column CriticalLoadCapacity_kW
+		dataType: double
+		sourceColumn: CriticalLoadCapacity_kW
+		summarizeBy: none
+
+	column CurrentCriticalLoad_kW
+		dataType: double
+		sourceColumn: CurrentCriticalLoad_kW
+		summarizeBy: none
+
+	column CriticalLoadPctCapacity
+		dataType: double
+		sourceColumn: CriticalLoadPctCapacity
+		summarizeBy: none
+		formatString: 0.0%
+
+	column UtilityRate_kWh
+		dataType: double
+		sourceColumn: UtilityRate_kWh
+		summarizeBy: none
+		formatString: \$#,0.000
+
+	column SiteBusinessPriorityScore
+		dataType: double
+		sourceColumn: SiteBusinessPriorityScore
+		summarizeBy: none
+
+	column UPSArrayType
+		dataType: string
+		sourceColumn: UPSArrayType
+		summarizeBy: none
+
+	column CoolingRedundancy
+		dataType: string
+		sourceColumn: CoolingRedundancy
+		summarizeBy: none
+
+	column UPSRedundancy
+		dataType: string
+		sourceColumn: UPSRedundancy
+		summarizeBy: none
+
+	column GenRedundancy
+		dataType: string
+		sourceColumn: GenRedundancy
+		summarizeBy: none
+
+	partition Dim_Site = m
+		mode: import
+		source = ```
+				let
+				    Src = Excel.Workbook(File.Contents("Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx"), null, true),
+				    Sheet = Src{[Item="Entry- Site Data",Kind="Sheet"]}[Data],
+				    Promoted = Table.PromoteHeaders(Table.Skip(Sheet, 19), [PromoteAllScalars=true])
+				in
+				    Promoted
+				```
+
+
+table Dim_AssetType
+	lineageTag: dim-assettype-0300
+
+	/// 27 categories seen in 'Output- Site Scores' header. Expected life & default
+	/// cost/size come from 'Costs and Scoring'. Exponent = 0.8 for all classes.
+	column EqCategory
+		dataType: string
+		isKey
+		sourceColumn: EqCategory
+		summarizeBy: none
+
+	column CategoryGroup
+		dataType: string
+		sourceColumn: CategoryGroup
+		summarizeBy: none
+
+	column ExpectedLifeYears
+		dataType: double
+		sourceColumn: ExpectedLifeYears
+		summarizeBy: none
+
+	column BaseSize
+		dataType: double
+		sourceColumn: BaseSize
+		summarizeBy: none
+
+	column BaseSizeUnit
+		dataType: string
+		sourceColumn: BaseSizeUnit
+		summarizeBy: none
+
+	column BaseCost
+		dataType: double
+		sourceColumn: BaseCost
+		summarizeBy: none
+		formatString: \$#,0
+
+	column SizeExponent
+		dataType: double
+		sourceColumn: SizeExponent
+		summarizeBy: none
+
+	partition Dim_AssetType = m
+		mode: import
+		source = ```
+				// Seeded from 'Costs and Scoring' rows 15-58 and 'Lists'.
+				let
+				    Src = Excel.Workbook(File.Contents("Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx"), null, true),
+				    Sheet = Src{[Item="Costs and Scoring",Kind="Sheet"]}[Data]
+				    // TODO: shape to [EqCategory],[BaseSize],[BaseSizeUnit],[BaseCost],[SizeExponent]=0.8
+				in
+				    Sheet
+				```
+
+
+table Dim_Date
+	lineageTag: dim-date-0400
+	dataCategory: Time
+
+	column Year
+		dataType: int64
+		isKey
+		sourceColumn: Year
+		summarizeBy: none
+
+	column ForecastYearIndex
+		dataType: int64
+		sourceColumn: ForecastYearIndex
+		summarizeBy: none
+
+	partition Dim_Date = calculated
+		mode: import
+		source = ```
+				// 10-year forecast horizon. Anchor to file year (2025) per Rev History.
+				VAR startY = 2025
+				RETURN
+				SELECTCOLUMNS(
+				    GENERATESERIES(1, 10, 1),
+				    "Year", startY - 1 + [Value],
+				    "ForecastYearIndex", [Value]
+				)
+				```
+
+
+table Dim_ScoringWeights
+	lineageTag: dim-scoringweights-0500
+
+	/// EXACT values from the 'Criteria' tab (rows 16-24). Parameterized so the
+	/// weighted score is tunable rather than hard-coded.
+	column Criteria
+		dataType: string
+		isKey
+		sourceColumn: Criteria
+		summarizeBy: none
+
+	column Rank
+		dataType: int64
+		sourceColumn: Rank
+		summarizeBy: none
+
+	column Weighting
+		dataType: double
+		sourceColumn: Weighting
+		summarizeBy: none
+
+	partition Dim_ScoringWeights = calculated
+		mode: import
+		source = ```
+				DATATABLE(
+				    "Criteria", STRING,
+				    "Rank", INTEGER,
+				    "Weighting", DOUBLE,
+				    {
+				        {"Criticality", 1, 100.0},
+				        {"Operating Issues", 2, 88.88888888888889},
+				        {"Redundancy", 3, 77.77777777777779},
+				        {"Service and Support", 4, 66.66666666666666},
+				        {"Age", 5, 55.55555555555556},
+				        {"Site Business Priority", 6, 44.44444444444444},
+				        {"Efficiency", 7, 33.33333333333333},
+				        {"Maintenance Cost", 8, 22.22222222222222},
+				        {"Loading / Equipment Taxing", 9, 11.11111111111111}
+				    }
+				)
+				```
+
+
+table Dim_ScoreZone
+	lineageTag: dim-scorezone-0600
+
+	/// Green / Yellow / Red banding used by 'Assets by Overall Score Zone'.
+	column Zone
+		dataType: string
+		isKey
+		sourceColumn: Zone
+		summarizeBy: none
+
+	column MinScore
+		dataType: double
+		sourceColumn: MinScore
+		summarizeBy: none
+
+	column MaxScore
+		dataType: double
+		sourceColumn: MaxScore
+		summarizeBy: none
+
+	column SortOrder
+		dataType: int64
+		sourceColumn: SortOrder
+		summarizeBy: none
+
+	partition Dim_ScoreZone = calculated
+		mode: import
+		source = ```
+				DATATABLE(
+				    "Zone", STRING, "MinScore", DOUBLE, "MaxScore", DOUBLE, "SortOrder", INTEGER,
+				    {
+				        {"Green (0-15)", 0.0, 15.0, 1},
+				        {"Yellow (15-32)", 15.0, 32.0, 2},
+				        {"Red (32-100)", 32.0, 100.0, 3}
+				    }
+				)
+				```
+
+
+/////////////////////////////////////////////////////////////////////////////////
+// PARAMETER (WHAT-IF) TABLES  -  drive the threshold slicers in the reports
+/////////////////////////////////////////////////////////////////////////////////
+
+table _Param_ReplacementThreshold
+	lineageTag: param-repl-threshold-0700
+
+	measure 'Replacement Threshold Value' = SELECTEDVALUE('_Param_ReplacementThreshold'[Threshold], 50)
+		formatString: 0
+
+	column Threshold
+		dataType: int64
+		isHidden
+		sourceColumn: Threshold
+		summarizeBy: none
+
+	partition _Param_ReplacementThreshold = calculated
+		mode: import
+		source = SELECTCOLUMNS(GENERATESERIES(0, 100, 5), "Threshold", [Value])
+
+
+table _Param_RiskThreshold
+	lineageTag: param-risk-threshold-0701
+
+	measure 'Risk Threshold Value' = SELECTEDVALUE('_Param_RiskThreshold'[Threshold], 7)
+		formatString: 0
+
+	column Threshold
+		dataType: int64
+		isHidden
+		sourceColumn: Threshold
+		summarizeBy: none
+
+	partition _Param_RiskThreshold = calculated
+		mode: import
+		source = SELECTCOLUMNS(GENERATESERIES(0, 10, 1), "Threshold", [Value])
+
+
+/////////////////////////////////////////////////////////////////////////////////
+// RELATIONSHIPS  (star schema)
+/////////////////////////////////////////////////////////////////////////////////
+
+relationship rel_AssetScore_Asset
+	fromColumn: Fact_AssetScore.AssetId
+	toColumn: Dim_Asset.AssetId
+
+relationship rel_AssetScore_Site
+	fromColumn: Fact_AssetScore.SiteNo
+	toColumn: Dim_Site.SiteNo
+
+relationship rel_AssetScore_Type
+	fromColumn: Fact_AssetScore.EqCategory
+	toColumn: Dim_AssetType.EqCategory
+
+relationship rel_SiteRisk_Site
+	fromColumn: Fact_SiteRisk.SiteNo
+	toColumn: Dim_Site.SiteNo
+
+relationship rel_SiteRisk_Type
+	fromColumn: Fact_SiteRisk.EqCategory
+	toColumn: Dim_AssetType.EqCategory
+
+relationship rel_Forecast_Asset
+	fromColumn: Fact_CapitalForecast.AssetId
+	toColumn: Dim_Asset.AssetId
+
+relationship rel_Forecast_Site
+	fromColumn: Fact_CapitalForecast.SiteNo
+	toColumn: Dim_Site.SiteNo
+
+relationship rel_Forecast_Date
+	fromColumn: Fact_CapitalForecast.ForecastYear
+	toColumn: Dim_Date.Year
