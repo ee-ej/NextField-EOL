@@ -1,0 +1,36 @@
+table DimSite
+	column SiteNo
+		dataType: string
+		summarizeBy: none
+	column SiteName
+		dataType: string
+		summarizeBy: none
+	column Ownership
+		dataType: string
+		summarizeBy: none
+
+	column AssetClass
+		dataType: string
+		summarizeBy: none
+	column Gen
+		dataType: string
+		summarizeBy: none
+	column EBITDA
+		dataType: double
+		summarizeBy: sum
+	column ValidationStatus
+		dataType: string
+		summarizeBy: none
+	column IsRestoredRecord
+		dataType: string
+		summarizeBy: none
+
+partition DimSite = m
+	mode: import
+	source = ```
+		let
+			Source = Csv.Document(File.Contents("reports/prototype/dim_site.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+			Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		in
+			Promoted
+		```

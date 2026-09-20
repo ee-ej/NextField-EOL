@@ -1,0 +1,8 @@
+ControlName,ControlValue,Unit,SourceSheet,SourceCell,SourceWorkbook,CalculationVersion,ValidationStatus
+ReplacementScoreThreshold,50.0,score,Costs and Scoring,D62,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,V1 workbook-derived,VerifiedInput
+NewEquipmentBaseScore,15.0,score,Costs and Scoring,D63,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,V1 workbook-derived,VerifiedInput
+ChartMidScore,32.5,score,Costs and Scoring,D64,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,V1 workbook-derived,VerifiedInput
+YearlyInflation,0.035,rate,Costs and Scoring,D65,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,V1 workbook-derived,VerifiedInput
+OverallCostCorrectionFactor,0.6,multiplier,Costs and Scoring,D66,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,V1 workbook-derived,VerifiedInput
+EquipmentSizeExponent,0.8,exponent,Costs and Scoring,G15:G49,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,V1 workbook-derived,VerifiedInput
+SiteRiskThreshold,7.0,score,Output- Site Risk Scores,D12,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,V1 workbook-derived,VerifiedInput

@@ -1,0 +1,29 @@
+table FactSPOFObservation
+	column SiteNo
+		dataType: string
+		summarizeBy: none
+	column SPOFQuestionId
+		dataType: string
+		summarizeBy: none
+	column AnswerValue
+		dataType: string
+		summarizeBy: none
+	column OriginalMarker
+		dataType: string
+		summarizeBy: none
+	column DetailedComments
+		dataType: string
+		summarizeBy: none
+	column SourceRowNumber
+		dataType: int64
+		summarizeBy: none
+	column SourceColumnStart
+		dataType: int64
+		summarizeBy: none
+	column SourceColumnEnd
+		dataType: int64
+		summarizeBy: none
+	column ValidationStatus
+		dataType: string
+		summarizeBy: none
+

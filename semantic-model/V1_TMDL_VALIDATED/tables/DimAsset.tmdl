@@ -1,0 +1,61 @@
+table DimAsset
+
+	/// Distinct asset count excluding explicitly flagged test records.
+	measure 'Governed Asset Count' = CALCULATE(DISTINCTCOUNT(DimAsset[AssetId]), DimAsset[IsTestRecord] <> "true")
+		formatString: #,0
+		displayFolder: 0 Counts
+		lineageTag: 4e7c1934-1142-4841-951c-d661024ba6a9
+
+	column AssetId
+		dataType: string
+		summarizeBy: none
+
+	column AssetName
+		dataType: string
+		summarizeBy: none
+
+	column CategoryName
+		dataType: string
+		summarizeBy: none
+
+	column AssetNo
+		dataType: string
+		summarizeBy: none
+
+	column SerialNo
+		dataType: string
+		summarizeBy: none
+
+	column Make
+		dataType: string
+		summarizeBy: none
+
+	column Model
+		dataType: string
+		summarizeBy: none
+
+	column SiteId
+		dataType: string
+		summarizeBy: none
+
+	column SiteNo
+		dataType: string
+		summarizeBy: none
+
+	column SiteName
+		dataType: string
+		summarizeBy: none
+
+	column IsTestRecord
+		dataType: string
+		summarizeBy: none
+
+	partition DimAsset = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Dev\NextField\NextField-EOL\reports\prototype\dim_asset.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    Promoted
+

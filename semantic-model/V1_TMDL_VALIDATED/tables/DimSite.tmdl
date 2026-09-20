@@ -1,0 +1,55 @@
+table DimSite
+
+	/// Count of modeled sites, including restored SLC05.
+	measure 'Modeled Site Count' = DISTINCTCOUNT(DimSite[SiteNo])
+		formatString: #,0
+		displayFolder: 0 Counts
+		lineageTag: bfe09b29-6cb3-496e-83d0-f4e4566c85c7
+
+	/// Count of valid site-master records, excluding restored overrides.
+	measure 'Source Site Count' = CALCULATE(DISTINCTCOUNT(DimSite[SiteNo]), DimSite[IsRestoredRecord] <> "true")
+		formatString: #,0
+		displayFolder: 0 Counts
+		lineageTag: 72c97f54-4f36-4190-8661-9916afc192af
+
+	column SiteNo
+		dataType: string
+		summarizeBy: none
+
+	column SiteName
+		dataType: string
+		summarizeBy: none
+
+	column Ownership
+		dataType: string
+		summarizeBy: none
+
+	column AssetClass
+		dataType: string
+		summarizeBy: none
+
+	column Gen
+		dataType: string
+		summarizeBy: none
+
+	column EBITDA
+		dataType: double
+		summarizeBy: sum
+
+	column ValidationStatus
+		dataType: string
+		summarizeBy: none
+
+	column IsRestoredRecord
+		dataType: string
+		summarizeBy: none
+
+	partition DimSite = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Dev\NextField\NextField-EOL\reports\prototype\dim_site.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    Promoted
+

@@ -1,0 +1,20 @@
+relationship rel_AssetScore_Asset
+	fromColumn: FactAssetScore.AssetId
+	toColumn: DimAsset.AssetId
+
+relationship rel_AssetScore_Site
+	fromColumn: FactAssetScore.SiteNo
+	toColumn: DimSite.SiteNo
+
+relationship rel_SiteRisk_Site
+	fromColumn: FactSiteRiskScore.SiteNo
+	toColumn: DimSite.SiteNo
+
+relationship rel_SPOFObservation_Site
+	fromColumn: FactSPOFObservation.SiteNo
+	toColumn: DimSite.SiteNo
+
+relationship rel_SPOFObservation_Question
+	fromColumn: FactSPOFObservation.SPOFQuestionId
+	toColumn: DimSPOFQuestion.SPOFQuestionId
+

@@ -1,0 +1,59 @@
+table FactSiteRiskScore
+
+	/// Average derived site risk score across the current filter context.
+	measure 'Average Site Risk Score' = AVERAGE(FactSiteRiskScore[OverallRiskScore])
+		formatString: 0.00
+		displayFolder: 1 Risk
+		lineageTag: 2f498fdf-0997-48a5-ae86-b0377381bd95
+
+	/// Distinct sites with one or more derived risk items at or above the inclusive 7.0 threshold.
+	measure 'Sites With Risk Threshold Exceptions' = CALCULATE(DISTINCTCOUNT(FactSiteRiskScore[SiteNo]), FactSiteRiskScore[NumberItemsAtThreshold] > 0)
+		formatString: #,0
+		displayFolder: 1 Risk
+		lineageTag: fa38da5e-d746-45e2-a40f-3429eb1f6e87
+
+	column SiteNo
+		dataType: string
+		summarizeBy: none
+
+	column OverallRiskScore
+		dataType: double
+		summarizeBy: none
+
+	column NumberItemsAtThreshold
+		dataType: int64
+		summarizeBy: sum
+
+	column GeneratorScore
+		dataType: double
+		summarizeBy: none
+
+	column UPSScore
+		dataType: double
+		summarizeBy: none
+
+	column UtilityScore
+		dataType: double
+		summarizeBy: none
+
+	column CoolingScore
+		dataType: double
+		summarizeBy: none
+
+	column FireProtectionScore
+		dataType: double
+		summarizeBy: none
+
+	column OtherScore
+		dataType: double
+		summarizeBy: none
+
+	partition FactSiteRiskScore = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Dev\NextField\NextField-EOL\reports\prototype\fact_site_risk_score.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    Promoted
+

@@ -1,0 +1,35 @@
+table DimModelControl
+
+	column ControlName
+		dataType: string
+		summarizeBy: none
+
+	column ControlValue
+		dataType: double
+		summarizeBy: none
+
+	column Unit
+		dataType: string
+		summarizeBy: none
+
+	column SourceSheet
+		dataType: string
+		summarizeBy: none
+
+	column SourceCell
+		dataType: string
+		summarizeBy: none
+
+	column CalculationVersion
+		dataType: string
+		summarizeBy: none
+
+	partition DimModelControl = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Dev\NextField\NextField-EOL\reports\prototype\dim_model_control.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    Promoted
+

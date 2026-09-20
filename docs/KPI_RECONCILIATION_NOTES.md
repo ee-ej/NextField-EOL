@@ -11,8 +11,8 @@ The workbook therefore requires explicit table-end rules. A column's UsedRange a
 
 ## Observed Population Signals
 
-- `Entry- Eq Database` contains 9,070 numeric-looking, nonblank asset IDs before the explanatory notes/footer content.
-- `Entry- Site Data` contains 70 distinct site numbers.
+- `Entry- Eq Database` contains 9,065 valid numeric `AssetId` values under the approved typed boundary.
+- `Entry- Site Data` contains 66 valid site codes; four tail rows are narrative notes rather than site records.
 - `Output- Asset Scores` contains output rows with `AssetId = 0`; these should not automatically count as real assets.
 - The output also contains title/header/footer material inside its UsedRange.
 - A simple full-range distinct count reported 9,066 scored IDs, but this is not yet a trusted business KPI because output boundary and default-zero rules are unresolved.
@@ -20,7 +20,7 @@ The workbook therefore requires explicit table-end rules. A column's UsedRange a
 - `Output- Site Risk Scores` begins its data table at row 15 after two header rows at 13-14.
 - `Entry- Site SPOF Data` begins repeated site groups at row 24, with four columns per inspected site group and question rows beginning at row 29.
 - The tail of `Output- Asset Scores` contains generated zero-ID rows through row 10,553, and the site outputs contain zero-valued padded rows near their tails. These rows require an explicit valid-record predicate rather than a UsedRange-based import.
-- The SPOF matrix has 69 apparent four-column blocks across columns 7-282, versus 70 distinct site numbers in the site input. SPOF coverage cannot be declared complete until the missing or differently represented site block is identified.
+- The SPOF matrix has 66 detected four-column blocks across columns 7-282, matching the 66 valid site codes in the bounded site input. Forty-two scored asset rows reference `SLC05`, which is absent from that bounded site master.
 
 ## KPI Definitions to Establish
 

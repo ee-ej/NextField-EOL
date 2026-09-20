@@ -1,0 +1,44 @@
+table DimAsset
+	column AssetId
+		dataType: string
+		summarizeBy: none
+	column AssetName
+		dataType: string
+		summarizeBy: none
+	column CategoryName
+		dataType: string
+		summarizeBy: none
+	column AssetNo
+		dataType: string
+		summarizeBy: none
+	column SerialNo
+		dataType: string
+		summarizeBy: none
+	column Make
+		dataType: string
+		summarizeBy: none
+	column Model
+		dataType: string
+		summarizeBy: none
+	column SiteId
+		dataType: string
+		summarizeBy: none
+	column SiteNo
+		dataType: string
+		summarizeBy: none
+	column SiteName
+		dataType: string
+		summarizeBy: none
+	column IsTestRecord
+		dataType: string
+		summarizeBy: none
+
+partition DimAsset = m
+	mode: import
+	source = ```
+		let
+			Source = Csv.Document(File.Contents("reports/prototype/dim_asset.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+			Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		in
+			Promoted
+		```

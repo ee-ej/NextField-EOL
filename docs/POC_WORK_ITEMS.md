@@ -1,7 +1,7 @@
 # NextField EOL PoC Work Items
 
 Date: 2026-09-02
-Status: Planning only
+Status: Approved validation backlog
 
 ## Workstream 1: Workbook Source Profiling
 
@@ -14,7 +14,7 @@ Acceptance criteria:
 - Site, asset, score, budget, and SPOF keys are profiled for uniqueness, nulls, duplicates, and test/inactive values.
 - All transformations retain source-sheet and source-column provenance.
 
-Current evidence: header/data boundaries are verified for the principal input, asset-score, site-score, site-risk, and SPOF sheets. UsedRange padding, explanatory footers, and multi-row headers are confirmed. Full column-level profiling remains open.
+Current evidence: header/data boundaries and row-validity rules are approved for the principal input, asset-score, site-score, site-risk, and SPOF sheets. UsedRange padding, explanatory footers, and multi-row headers are confirmed. Full column-level profiling remains an execution task.
 
 ## Workstream 2: Scoring Reconciliation
 
@@ -28,7 +28,7 @@ Acceptance criteria:
 - Replacement threshold and SPOF threshold semantics are documented, including boundary behavior.
 - Any unexplained score differences are listed as decisions or defects rather than silently corrected.
 
-Current blocker: asset scores are rendered from `Scoring Engine` formulas, and numeric cached values were not reliable through the current read-only inspection path. Controlled recalculation or an independent calculation path is required.
+Current execution gate: full-population source-to-engine-to-output key alignment passed for 9,065 assets with zero mismatches. Controlled recalculation produced complete numeric values for 2,013 rows; all 2,013 matched across the overall score and nine components. The replacement threshold is inclusive at 50.0, and all 396 recalculated site-risk category counts matched the inclusive 7.0 rule. A further 3,351 asset rows lacked one or more dependent score values and remain open.
 
 ## Workstream 3: SPOF Normalization
 
@@ -42,7 +42,7 @@ Acceptance criteria:
 - A sample normalized output is reconciled to the workbook's risk outputs.
 - The transformation design is reusable if the future source is CMMS/EAM or Dataverse.
 
-Current blocker: the SPOF matrix presents 69 apparent four-column site blocks versus 70 distinct site numbers in site input. Coverage and any nonstandard block must be resolved before declaring normalization complete.
+Current execution gate: the SPOF matrix presents 69 apparent four-column site blocks versus 70 distinct site numbers in site input. Coverage and any nonstandard block must be resolved before declaring normalization complete.
 
 ## Workstream 4: KPI and Capital Reconciliation
 
@@ -51,7 +51,7 @@ Current blocker: the SPOF matrix presents 69 apparent four-column site blocks ve
 Acceptance criteria:
 
 - Separate definitions exist for site count, distinct asset count, equipment-row count, scored-row count, and SPOF exception count.
-- The `70 sites` versus approximately `9,070` asset/equipment rows discrepancy is quantified and explained.
+- The initial `70 sites` versus approximately `9,070` estimate is reconciled to 66 valid site codes and 9,065 valid asset records; excluded narrative rows and orphaned `SLC05` score references are documented.
 - Capital exposure is defined by year, site, asset, and category grain.
 - The `0.8` size-scaling exponent is separated from the `0.6` overall cost correction factor.
 - Any scope exclusions are visible in report context.

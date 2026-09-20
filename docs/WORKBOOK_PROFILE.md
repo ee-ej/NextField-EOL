@@ -9,8 +9,8 @@ Workbook: `source/Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xl
 
 | Source area | Observed result | Interpretation |
 |---|---:|---|
-| `Entry- Eq Database` AssetId | 9,070 nonblank and 9,070 distinct | Current equipment/asset input population candidate |
-| `Entry- Site Data` Site No. | 70 nonblank and 70 distinct | Candidate portfolio site count |
+| `Entry- Eq Database` AssetId | 9,065 valid numeric and distinct | Approved bounded equipment/asset input population |
+| `Entry- Site Data` Site No. | 66 valid site codes; four narrative tail rows excluded | Approved bounded portfolio site count |
 | `Entry- Site Data` Site Name | 66 nonblank and 39 distinct | Names are not a reliable site key and may represent repeated/variant labels |
 | `Output- Asset Scores` AssetId | 10,537 nonblank and 9,066 distinct | Output includes repeated/title/footer or duplicate asset rows; does not directly reconcile to entry population |
 | `Output- Asset Scores` SiteNo | 10,406 nonblank and 70 distinct | Site coverage is present, but output row population needs clean-boundary rules |
@@ -20,7 +20,7 @@ Workbook: `source/Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xl
 
 ## Immediate Implications
 
-1. The workbook supports the working statement of 70 sites and approximately 9,070 equipment rows, but the asset-score output does not reconcile directly: it has 9,066 distinct AssetId values and more nonblank rows than distinct IDs.
+1. The initial workbook estimate of 70 sites and approximately 9,070 equipment rows is superseded by the approved typed boundary: 66 sites and 9,065 assets. The asset-score output reconciles to 9,065 distinct AssetIds, but 42 rows reference orphaned site `SLC05`.
 2. KPI definitions must distinguish entry population, scored population, distinct assets, scored rows, and output rows.
 3. `SiteNo` should be the candidate site key. Site names should be descriptive attributes, not keys.
 4. Output sheets cannot be modeled by simply importing their full UsedRange. Header/title/footer boundaries must be explicitly defined.
@@ -34,7 +34,7 @@ Workbook: `source/Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xl
 - `Output- Site Scores` has its header at row 13 and site data beginning at row 14.
 - `Output- Site Risk Scores` has a two-level header at rows 13-14 and site data beginning at row 15.
 - `Entry- Site SPOF Data` has repeated site-group labels beginning at row 24, field labels at rows 25-28, and question rows beginning at row 29. Each visible site group is represented by a repeated four-column block in the inspected area.
-- The inspected SPOF matrix spans columns 7-282 after the left-side question fields. At four columns per site block, that span represents 69 site blocks, which does not yet reconcile to the 70 distinct site numbers in site data.
+- The inspected SPOF matrix spans columns 7-282 after the left-side question fields. The parser detects 66 four-column site blocks, matching the 66 valid site numbers in site data.
 - `Output- Asset Scores` remains populated through row 10,553 with generated rows whose asset identifier and score values are zero near the tail; these rows are padding/template output and must be excluded from business asset counts.
 - The site output sheets also remain populated through original-order rows 90-91 with zero-valued measures, reinforcing that UsedRange length is not the data boundary.
 - The workbook includes both visible output sheets and supporting calculation/transpose sheets; these should be treated as evidence until the authoritative input/output contracts are selected.

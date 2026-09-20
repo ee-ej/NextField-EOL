@@ -1,0 +1,11 @@
+table DimSPOFQuestion
+	column SPOFQuestionId
+		dataType: string
+		summarizeBy: none
+	column SPOFQuestion
+		dataType: string
+		summarizeBy: none
+	column SPOFCategory
+		dataType: string
+		summarizeBy: none
+

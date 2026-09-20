@@ -1,0 +1,15 @@
+model NextFieldEOL_V1_LocalPrototype
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	dataAccessOptions
+		returnErrorValuesAsNull
+
+ref table DimAsset
+ref table DimModelControl
+ref table DimSite
+ref table DimSPOFQuestion
+ref table FactAssetScore
+ref table FactSiteRiskScore
+ref table FactSPOFObservation
+ref table FactValidationException
+

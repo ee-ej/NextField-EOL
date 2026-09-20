@@ -1,0 +1,20 @@
+table DimModelControl
+	column ControlName
+		dataType: string
+		summarizeBy: none
+	column ControlValue
+		dataType: double
+		summarizeBy: none
+	column Unit
+		dataType: string
+		summarizeBy: none
+	column SourceSheet
+		dataType: string
+		summarizeBy: none
+	column SourceCell
+		dataType: string
+		summarizeBy: none
+	column CalculationVersion
+		dataType: string
+		summarizeBy: none
+

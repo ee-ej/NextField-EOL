@@ -1,0 +1,63 @@
+SPOFQuestionId,SPOFQuestion,SPOFCategory,SourceWorkbook,SourceSheet,SourceRowNumber,ValidationStatus
+1.02,Do the generator(s have) dual start batteries,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,30,Valid
+1.03,Do the generator(s) have dual chargers,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,31,Valid
+1.04,Are shore power panels fed from diverse sources,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,32,Valid
+1.05,Does the transfer mechanism (ATS) provide redundancy,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,33,Valid
+1.06,Do the  generator enclosure(s) have OA dampers,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,34,Valid
+1.07,Do the enclosure(s) have a cabinet unit heater,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,35,Valid
+1.08,Do the generator(s) have outside day tanks/fuel lines that aren't heat traced and insulated,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,36,Valid
+1.0900000000000001,Is the generator(s) exhaust properly protected from rain/birds/debris,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,37,Valid
+1.1000000000000001,Has generator pre-lube been initiated on all required,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,38,Valid
+1.1100000000000001,Can the generators be paralleled manually,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,39,Valid
+1.1200000000000001,Can the site be transferred to generator(s) and utility manually,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,40,Valid
+1.1300000000000001,The the generator(s) output to a single bus,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,41,Valid
+2,UPS,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,42,Valid
+2.0099999999999998,Does the system have a functioning maintenance bypass,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,43,Valid
+2.0199999999999996,Does the system(s) have multiple battery strings,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,44,Valid
+2.0299999999999994,Does each battery string have a battery breaker,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,45,Valid
+2.0399999999999991,Does the UPS room have redundant CRAH/CRAC/AC,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,46,Valid
+2.0499999999999989,Are the systems fed from separate Switchboards or Substations,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,47,Valid
+2.0599999999999987,Does the system have separate input and bypass breakers,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,48,Valid
+2.0699999999999985,Does each battery string have a functioning battery monitoring system,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,49,Valid
+3,Utility,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,50,Valid
+3.01,Does the site have dual utility feeds,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,51,Valid
+3.0199999999999996,Does the site have dual water feeds,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,52,Valid
+3.0299999999999994,If water is necessary to run facility does a back-up tank exist,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,53,Valid
+3.0399999999999991,Does facility have an ATO or Cross Ties if dual utilities exist,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,54,Valid
+3.0499999999999989,Are there any  transformers that are oil filled,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,55,Valid
+3.0599999999999987,Are all water lines heat traced and insulated,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,56,Valid
+4,Cooling,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,57,Valid
+4.01,Are chillers a minimum of N+1,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,58,Valid
+4.0199999999999996,Are chillers fed from diverse electrical sources to provide a minimum N,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,59,Valid
+4.0299999999999994,Are CRAH/CRAC an minimum of N+1,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,60,Valid
+4.0399999999999991,Are CRAH/CRAC fed from diverse electrical sources to provide a minimum N,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,61,Valid
+4.0499999999999989,Are CHWP’s a minimum of N+1,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,62,Valid
+4.0599999999999987,Are CHWP’s fed form diverse electrical sources to provide a minimum N,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,63,Valid
+4.0699999999999985,Are CWP’s a minimum of N+1,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,64,Valid
+4.0799999999999983,Are CWP’s fed form diverse electrical sources to provide a minimum N,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,65,Valid
+4.0899999999999981,Are CT’s a minimum of N+1,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,66,Valid
+4.0999999999999979,Are CT’s fed from diverse electrical sources to provide a minimum N,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,67,Valid
+4.1099999999999977,Can CT sumps be isolated,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,68,Valid
+4.1199999999999974,Is all power room cooling a minimum of N+1,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,69,Valid
+4.1299999999999972,Is all power room cooling fed from diverse electrical sources to provide a minimum N,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,70,Valid
+4.139999999999997,Do all OA dampers close properly,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,71,Valid
+4.1499999999999968,Are all freeze stats installed properly/tested,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,72,Valid
+4.1599999999999966,Can all cooling equipment be operated manually without BMS,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,73,Valid
+4.1699999999999964,Are all BMS Panels fed by UPS power,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,74,Valid
+4.1799999999999962,Are all BMS Panels fed by two sources,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,75,Valid
+4.1899999999999959,Do all motorized actuators fail to a position that does not impact cooling operation,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,76,Valid
+5,Electrical,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,77,Valid
+5.01,Do all main tie main boards have an interlock,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,78,Valid
+5.0199999999999996,Are all main tie main boards automatic,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,79,Valid
+5.0299999999999994,Do all switchboards with dual mains have kirk keys or interlocked,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,80,Valid
+5.0399999999999991,Do all ATS’s have a draw out style mechanism,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,81,Valid
+5.0499999999999989,"Does PDU's,RPP's, and or CSB have shunt trips connected",,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,82,Valid
+5.0599999999999987,Do all ATS's have a bypass,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,83,Valid
+5.0699999999999985,Are all oil filled transformers in a positive pressure,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,84,Valid
+6,Fire Detection and Suppression,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,85,Valid
+6.01,Are all loading docks dual interlocked pre action,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,86,Valid
+6.02,Do all loading docks have a functioning CUH,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,87,Valid
+6.0299999999999994,Do all sprinkler riser rooms have a functining CUH,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,88,Valid
+6.0399999999999991,Are all power rooms dual interlocked pre- action,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,89,Valid
+6.0499999999999989,Is there a map in each riser room to indicate zone coverage,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,90,Valid
+6.0599999999999987,Is each zone clearly identified,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site SPOF Data,91,Valid

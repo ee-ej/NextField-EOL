@@ -1,0 +1,110 @@
+table FactAssetScore
+
+	/// Distinct scored assets excluding explicitly flagged test records.
+	measure 'Scored Asset Count' = CALCULATE(DISTINCTCOUNT(FactAssetScore[AssetId]), FactAssetScore[IsTestRecord] <> "true")
+		formatString: #,0
+		displayFolder: 0 Counts
+		lineageTag: 2e028754-9fc4-447f-b756-7967604c8465
+
+	/// Distinct scored assets meeting the inclusive workbook replacement threshold of 50.0.
+	measure 'Assets At Or Above Replacement Threshold' = CALCULATE([Scored Asset Count], FactAssetScore[OverallScore] >= 50)
+		formatString: #,0
+		displayFolder: 0 Counts
+		lineageTag: 71e599e4-2c8a-4dcf-824f-b7a31f6d0354
+
+	/// Replacement cost from derived asset scores, excluding test records.
+	measure 'ROM Replacement Cost' = CALCULATE(SUM(FactAssetScore[ROMReplacementCost]), FactAssetScore[IsTestRecord] <> "true")
+		formatString: $#,0
+		displayFolder: 2 Cost
+		lineageTag: 7ec21e85-bd5c-41aa-aa6b-5b8678cd3b33
+
+	/// Share of governed source assets represented by a scored asset result.
+	measure 'Scored Asset Coverage' = DIVIDE([Scored Asset Count], CALCULATE(DISTINCTCOUNT(DimAsset[AssetId]), DimAsset[IsTestRecord] <> "true"))
+		formatString: 0.0%
+		displayFolder: 3 Validation
+		lineageTag: 8cf2397b-a1e6-4497-9999-fca222dc4bc5
+
+	column AssetId
+		dataType: string
+		summarizeBy: none
+
+	column SiteNo
+		dataType: string
+		summarizeBy: none
+
+	column SiteName
+		dataType: string
+		summarizeBy: none
+
+	column CategoryName
+		dataType: string
+		summarizeBy: none
+
+	column OverallScore
+		dataType: double
+		summarizeBy: none
+
+	column EqCriticality
+		dataType: double
+		summarizeBy: none
+
+	column EqOperatingIssues
+		dataType: double
+		summarizeBy: none
+
+	column EqRedundancy
+		dataType: double
+		summarizeBy: none
+
+	column EqServiceSupport
+		dataType: double
+		summarizeBy: none
+
+	column EqAge
+		dataType: double
+		summarizeBy: none
+
+	column SiteBusinessPriority
+		dataType: double
+		summarizeBy: none
+
+	column EqEfficiency
+		dataType: double
+		summarizeBy: none
+
+	column EqMainCost
+		dataType: double
+		summarizeBy: none
+
+	column EqLoading
+		dataType: double
+		summarizeBy: none
+
+	column ROMReplacementCost
+		dataType: double
+		summarizeBy: sum
+
+	column BudgetYear
+		dataType: int64
+		summarizeBy: none
+
+	column ROMCostInBudgetYear
+		dataType: double
+		summarizeBy: sum
+
+	/// Flags confirmed test records for exclusion from governed measures.
+	column IsTestRecord
+		dataType: string
+		lineageTag: ef859381-a77f-4738-ab80-953e9698661e
+		summarizeBy: none
+		sourceColumn: IsTestRecord
+
+	partition FactAssetScore = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Dev\NextField\NextField-EOL\reports\prototype\fact_asset_score.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    Promoted
+

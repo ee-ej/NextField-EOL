@@ -55,4 +55,8 @@ Convert the transposed `Entry- Site SPOF Data` matrix into long-form evidence wi
 - Does the risk output count `Yes`, selected `No`, blanks, or another condition?
 - How does `N/A` affect the site risk score and threshold count?
 
+## Validated Transformation Boundary
+
+The normalized table must preserve raw answer semantics separately from derived risk scores. `Output- Site Risk Scores` reads numeric question scores from `Transpose Actual Adj`; a representative DAL01 trace showed that the same raw answer can produce different numeric scores depending on the question. The normalization layer must therefore retain `AnswerValue`, while any question-level risk score is a separate derived field with its weighting provenance.
+
 No workbook data was changed by this plan.

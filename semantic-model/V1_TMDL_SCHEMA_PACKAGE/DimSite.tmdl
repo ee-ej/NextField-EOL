@@ -1,0 +1,27 @@
+table DimSite
+	column SiteNo
+		dataType: string
+		summarizeBy: none
+	column SiteName
+		dataType: string
+		summarizeBy: none
+	column Ownership
+		dataType: string
+		summarizeBy: none
+
+	column AssetClass
+		dataType: string
+		summarizeBy: none
+	column Gen
+		dataType: string
+		summarizeBy: none
+	column EBITDA
+		dataType: double
+		summarizeBy: sum
+	column ValidationStatus
+		dataType: string
+		summarizeBy: none
+	column IsRestoredRecord
+		dataType: string
+		summarizeBy: none
+

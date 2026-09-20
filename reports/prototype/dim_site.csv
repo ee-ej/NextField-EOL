@@ -1,0 +1,68 @@
+SiteNo,SiteName,Ownership,AssetClass,Gen,EBITDA,SourceWorkbook,SourceSheet,SourceRowNumber,ValidationStatus,IsRestoredRecord
+ABE01,Allentown,Leased,Maintain,2,4223969,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,21,Valid,false
+ATL01,Atlanta-Norcross,Leased,Activate,2,3061608,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,22,Valid,false
+ATL02,Atlanta-Norcross,Leased,Activate,2,3061608,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,23,Valid,false
+ATL03,Atlanta-Alpharetta,Leased,Hyper Growth,3,5033149.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,24,Valid,false
+ATL04,Atlanta-Alpharetta,Owned,Hyper Growth,4,5033149.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,25,Valid,false
+ATL05,Atlanta-Douglasville,Owned,Hyper Growth,3,2371372,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,26,Valid,false
+CIN01,Cincinnati,Leased,Activate,2,1219837,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,27,Valid,false
+CIN02,Cincinnati,Leased,Activate,2,1219837,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,28,Valid,false
+CLT01,Charlotte-South,Leased,Activate,1,1540922.66666666,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,29,Valid,false
+CLT02,Charlotte-South,Leased,Activate,2,1540922.66666666,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,30,Valid,false
+CLT03,Charlotte-South,Leased,Activate,2,1540922.66666666,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,31,Valid,false
+CLT04,Charlotte-North,Leased,Growth,2,962132,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,32,Valid,false
+CLT05,Charlotte-North,Leased,Growth,3,962132,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,33,Valid,false
+DAL01,Dallas-Downtown,Leased,Activate,1,574910.6,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,34,Valid,false
+DAL02,Dallas-Downtown,Leased,Activate,1,574910.6,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,35,Valid,false
+DAL03,Dallas-Downtown,Leased,Activate,1,574910.6,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,36,Valid,false
+DAL04,Dallas-Downtown,Leased,Activate,1,574910.6,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,37,Valid,false
+DAL05,Dallas-Downtown,Leased,Activate,1,574910.6,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,38,Valid,false
+DEN02,Denver-Downtown,Leased,Maintain,2,96730,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,39,Valid,false
+DEN03,Denver-Aurora,Leased,Activate,3,10705205,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,40,Valid,false
+DEN05.01,Denver-Centennial,Leased,Maintain,1,974293.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,41,Valid,false
+DEN05.02,Denver-Centennial,Leased,Maintain,1,974293.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,42,Valid,false
+DEN11,Denver-Englewood,Owned,Growth,4,18654166,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,43,Valid,false
+DFW01,Dallas-Plano,Owned,Growth,4,10568095,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,44,Valid,false
+FLL01,Fort Lauderdale,Leased,Activate,1,1199245.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,45,Valid,false
+FLL02,Fort Lauderdale,Leased,Activate,2,1199245.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,46,Valid,false
+JAX01,Jacksonville,Owned,Maintain,1,398152.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,47,Valid,false
+JAX02,Jacksonville,Owned,Maintain,2,398152.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,48,Valid,false
+LAS03,Las Vegas-Downtown,Leased,Activate,1,398152.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,49,Valid,false
+LAS04,Las Vegas-North,Leased,Activate,4,8293539,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,50,Valid,false
+LAS05,Las Vegas-Downtown,Leased,Activate,1,398152.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,51,Valid,false
+LOU02,Louisville-Downtown,Leased,Activate,2,1939686.66666666,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,52,Valid,false
+LOU03,Louisville-Downtown,Leased,Activate,2,1939686.66666666,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,53,Valid,false
+LOU04,Louisville-Downtown,Leased,Activate,2,1939686.66666666,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,54,Valid,false
+LOU05,Louisville-East,Owned,Activate,2,517243,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,55,Valid,false
+MSP01,Minneapolis-Chaska,Owned,Growth,4,5815427,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,56,Valid,false
+NAS01,Nashville-Brentwood,Leased,Maintain,1,506724,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,57,Valid,false
+NAS02,Nashville-Cool Springs,Leased,Maintain,2,1938092,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,58,Valid,false
+NAS03,Nashville-Cool Springs,Leased,Maintain,2,1938092,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,59,Valid,false
+NAS04,Nashville-Brentwood,Leased,Maintain,1,506724,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,60,Valid,false
+NAS05,Nashville-Franklin,Leased,Growth,3,1627719,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,61,Valid,false
+NAS06,Nashville-Franklin,Leased,Growth,4,1627719,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,62,Valid,false
+PDX01.01,Portland-Hillsboro 1,Leased,Activate,3,1193491,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,63,Valid,false
+PDX01.02,Portland-Hillsboro 1,Leased,Activate,3,1193491,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,64,Valid,false
+PDX02,Portland-Hillsboro 2,Owned,Hyper Growth,4,14195220,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,65,Valid,false
+PDX03,Portland-Hillsboro 3,Owned,Hyper Growth,4,14514705,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,66,Valid,false
+PDX04,Portland-Hillsboro 4,Owned,Hyper Growth,3,5866346,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,67,Valid,false
+PHL01,Philadelphia-Collegeville,Owned,Activate,4,412186,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,68,Valid,false
+PHX01,Phoenix-Deer Valley,Owned,Activate,3,3089318,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,69,Valid,false
+RAL01,Raleigh,Leased,Activate,1,789028.33333333302,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,70,Valid,false
+RAL02,Raleigh,Leased,Activate,2,789028.33333333302,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,71,Valid,false
+RAL03,Raleigh,Leased,Activate,2,789028.33333333302,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,72,Valid,false
+RCH01,Dallas-Richardson,Leased,Activate,3,5546189,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,73,Valid,false
+RIC01,Richmond,Leased,Activate,1,817037.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,74,Valid,false
+RIC02,Richmond,Leased,Activate,2,817037.5,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,75,Valid,false
+SLC03,Salt Lake City-Lindon,Leased,Maintain,2,446102,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,76,Valid,false
+SLC04.01,Salt Lake City-Downtown,Leased,Maintain,2,1344922.66666666,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,77,Valid,false
+SLC04.02,Salt Lake City-Downtown,Leased,Maintain,1,1344922.66666666,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,78,Valid,false
+SLC04.03,Salt Lake City-Downtown,Leased,Growth,3,1344922.66666666,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,79,Valid,false
+SLC07,Salt Lake City-Fair Park,Leased,Maintain,1,392951,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,80,Valid,false
+SLC09,Salt Lake City-South Valley,Owned,Maintain,1,1207927,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,81,Valid,false
+SLC10,Salt Lake City-Millcreek,Leased,Activate,2,-121791,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,82,Valid,false
+TPA01,Tampa-West,Leased,Activate,2,855692,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,83,Valid,false
+TPA02,Tampa-West,Leased,Activate,2,855692,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,84,Valid,false
+TPA03,Tampa-North,Leased,Activate,2,1073401,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,85,Valid,false
+TPA04,Tampa-North,Leased,Activate,2,1073401,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Site Data,86,Valid,false
+SLC05,Salt Lake City-Cottonwood,,,,,Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx,Entry- Eq Database,,RestoredFromAssetEvidence,true

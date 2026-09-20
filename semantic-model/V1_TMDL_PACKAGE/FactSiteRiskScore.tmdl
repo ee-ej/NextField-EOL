@@ -1,0 +1,38 @@
+table FactSiteRiskScore
+	column SiteNo
+		dataType: string
+		summarizeBy: none
+	column OverallRiskScore
+		dataType: double
+		summarizeBy: none
+	column NumberItemsAtThreshold
+		dataType: int64
+		summarizeBy: sum
+	column GeneratorScore
+		dataType: double
+		summarizeBy: none
+	column UPSScore
+		dataType: double
+		summarizeBy: none
+	column UtilityScore
+		dataType: double
+		summarizeBy: none
+	column CoolingScore
+		dataType: double
+		summarizeBy: none
+	column FireProtectionScore
+		dataType: double
+		summarizeBy: none
+	column OtherScore
+		dataType: double
+		summarizeBy: none
+
+partition FactSiteRiskScore = m
+	mode: import
+	source = ```
+		let
+			Source = Csv.Document(File.Contents("reports/prototype/fact_site_risk_score.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+			Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		in
+			Promoted
+		```

@@ -1,0 +1,2 @@
+SiteNo,SiteId,SiteName,Ownership,AssetClass,Gen,EBITDA,SourceSheet,SourceEvidence,RestorationStatus,NeedsSMEReview
+SLC05,143,Salt Lake City-Cottonwood,,,,,Entry- Eq Database,41 asset rows,RestoredFromAssetEvidence,true

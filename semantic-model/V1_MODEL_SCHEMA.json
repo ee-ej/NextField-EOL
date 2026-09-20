@@ -1,0 +1,58 @@
+{
+  "modelName": "NextField EOL V1 Local Prototype",
+  "status": "local-prototype",
+  "sourceWorkbook": "source/Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx",
+  "v2Status": "parked-excluded",
+  "publicationApproved": false,
+  "tables": [
+    {"name": "DimSite", "file": "reports/prototype/dim_site.csv", "grain": "one row per modeled site", "key": ["SiteNo"], "rowCount": 67},
+    {"name": "DimAsset", "file": "reports/prototype/dim_asset.csv", "grain": "one row per bounded asset input row", "key": ["AssetId"], "rowCount": 9065},
+    {"name": "FactAssetScore", "file": "reports/prototype/fact_asset_score.csv", "grain": "one row per derived asset score", "key": ["AssetId"], "rowCount": 9065},
+    {"name": "FactSiteRiskScore", "file": "reports/prototype/fact_site_risk_score.csv", "grain": "one row per source site risk result", "key": ["SiteNo"], "rowCount": 66},
+    {"name": "DimSPOFQuestion", "file": "reports/prototype/dim_spof_question.csv", "grain": "one row per SPOF question or category row", "key": ["SPOFQuestionId"], "rowCount": 62},
+    {"name": "FactSPOFObservation", "file": "reports/prototype/fact_spof_observation.csv", "grain": "one row per site and SPOF question", "key": ["SiteNo", "SPOFQuestionId"], "rowCount": 4092},
+    {"name": "DimModelControl", "file": "reports/prototype/dim_model_control.csv", "grain": "one row per workbook-derived control", "key": ["ControlName"], "rowCount": 7},
+    {"name": "FactValidationException", "file": "reports/prototype/fact_validation_exception.csv", "grain": "one row per validation exception", "key": ["ExceptionType", "BusinessKey", "SourceRowNumber"], "rowCount": 43}
+  ],
+  "relationships": [
+    {"from": "DimSite.SiteNo", "to": "DimAsset.SiteNo", "cardinality": "one-to-many"},
+    {"from": "DimSite.SiteNo", "to": "FactAssetScore.SiteNo", "cardinality": "one-to-many"},
+    {"from": "DimSite.SiteNo", "to": "FactSiteRiskScore.SiteNo", "cardinality": "one-to-one-or-missing"},
+    {"from": "DimSite.SiteNo", "to": "FactSPOFObservation.SiteNo", "cardinality": "one-to-many"},
+    {"from": "DimAsset.AssetId", "to": "FactAssetScore.AssetId", "cardinality": "one-to-one"},
+    {"from": "DimSPOFQuestion.SPOFQuestionId", "to": "FactSPOFObservation.SPOFQuestionId", "cardinality": "one-to-many"}
+  ],
+  "measures": [
+    {"table": "DimSite", "name": "Modeled Site Count"},
+    {"table": "DimSite", "name": "Source Site Count"},
+    {"table": "DimAsset", "name": "Governed Asset Count"},
+    {"table": "FactAssetScore", "name": "Scored Asset Count"},
+    {"table": "FactAssetScore", "name": "Assets At Or Above Replacement Threshold"},
+    {"table": "FactAssetScore", "name": "ROM Replacement Cost"},
+    {"table": "FactSiteRiskScore", "name": "Average Site Risk Score"},
+    {"table": "FactSiteRiskScore", "name": "Sites With Risk Threshold Exceptions"},
+    {"table": "FactSPOFObservation", "name": "SPOF Observation Count"},
+    {"table": "FactSPOFObservation", "name": "Valid SPOF Observation Count"},
+    {"table": "FactSPOFObservation", "name": "Blank SPOF Observation Count"},
+    {"table": "FactSPOFObservation", "name": "Multiple Answer SPOF Count"},
+    {"table": "FactAssetScore", "name": "Scored Asset Coverage"},
+    {"table": "FactSPOFObservation", "name": "SPOF Answer Completeness"},
+    {"table": "FactValidationException", "name": "Validation Exception Count"}
+  ],
+  "rules": {
+    "replacementThreshold": {"value": 50.0, "comparison": ">="},
+    "siteRiskThreshold": {"value": 7.0, "comparison": ">="},
+    "overallCostCorrectionFactor": {"value": 0.6, "status": "workbook-derived"},
+    "equipmentSizeExponent": {"value": 0.8, "status": "workbook-derived"},
+    "testAssetIds": ["7057"],
+    "restoredSites": ["SLC05"],
+    "answerStates": ["Yes", "No", "N/A", "Blank", "MultipleAnswers"]
+  },
+  "excludedFromGovernedMeasures": [
+    "metadata and instruction rows",
+    "narrative and footer rows",
+    "padding and zero-identifier rows",
+    "test asset 7057",
+    "unresolved or incomplete calculated values"
+  ]
+}

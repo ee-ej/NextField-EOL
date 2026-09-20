@@ -1,7 +1,7 @@
 # NextField EOL PoC Planning
 
 Date: 2026-09-03
-Status: Planning only
+Status: Approved V1 contract; local prototype execution
 Target workspace: `NextField-EOL-Dev`
 
 ## Objective
@@ -14,7 +14,7 @@ The supplied TMDL is a candidate model scaffold. It is not approved as the final
 
 Decision status: Confirmed for the current PoC
 
-- The Excel workbook is the only available source and is the current PoC source of record.
+- The V1 Excel workbook is the active PoC source of record. V2 is parked and excluded from the current prototype.
 - CMMS/EAM is the presumed eventual operational source of record, but it is not available or confirmed for this PoC.
 - Dataverse is a future source/integration option and is not a current dependency.
 - The initial model and report plan must therefore be workbook-grounded, with source provenance and transformation assumptions documented so a later CMMS/EAM or Dataverse transition can be evaluated without changing the business contract.
@@ -117,9 +117,10 @@ The workbook currently provides replacement scores, risk scores, SPOF flags, and
 | Copilot CLI | Available, `1.0.75` |
 | Power BI authoring plugin | Installed, `0.3.14` |
 | Power BI Modeling MCP | Responding |
-| Power BI Desktop connection | Not currently connected |
+| Power BI Desktop connection | Connected to `localhost:49788`; untitled model is empty and unprocessed |
 | Fabric workspace | Target confirmed as `NextField-EOL-Dev` |
-| Fabric semantic model | Not yet created or resolved |
+| Local offline semantic model | Validated: 8 tables, 5 relationships, 13 measures |
+| Fabric semantic model | Not created; publication remains gated |
 | Remote write approval | Not granted for implementation |
 
 ## Current Evidence Status
@@ -132,16 +133,15 @@ Phase 1 profiling has established reliable structural findings but has not compl
 - The SPOF matrix presents 69 apparent four-column site blocks across columns 7-282 versus 70 distinct site numbers in site input. Coverage is unresolved.
 - Numeric score cache values were not reliable through the current read-only inspection path, so score equality is not yet established.
 
-Phase 2 source-to-model contracting and Phase 3 UX evaluation remain blocked from finalization until these structural and scoring questions are resolved.
+Phase 2 source-to-model contracting and row-boundary approval are complete. The project is now executing the local V1 prototype while carrying the documented score/cache, SLC05, SPOF, and cost exceptions.
 
-## Decisions Needed Before Phase 4
+## Remaining Validation Gates Before Publication
 
-1. Future source-of-record path: validate the presumed CMMS/EAM direction and evaluate Dataverse as a future integration option after the workbook PoC.
-2. KPI scope: define how site count, asset count, equipment-row count, and scored-row count should be presented and reconciled.
-3. SPOF contract: approve the long-form normalized table shape and treatment of `Yes`, `No`, `N/A`, comments, blanks, and duplicate selections.
-4. Cost governance: decide whether the 0.6 correction factor is governed model logic, an explicit parameter, or workbook-only context.
-5. Leadership landing-page success criteria and the dominant decision it must support in the first 10 seconds.
-6. Semantic model creation point: local first, Fabric first, or local validation followed by approved deployment.
+1. Complete the local V1 model prototype described in `semantic-model/V1_MODEL_PROTOTYPE_SPEC.md`.
+2. Resolve or explicitly quarantine the 3,351 incomplete score rows.
+3. Complete SLC05 site-level and SPOF treatment with SME input.
+4. Validate full cost adjustment order and remaining SPOF risk lineage.
+5. Lock the report specification and obtain explicit publication approval before remote writes.
 
 ## Planning Outputs
 
@@ -150,4 +150,4 @@ Phase 2 source-to-model contracting and Phase 3 UX evaluation remain blocked fro
 - `docs/UX_EVALUATION_PRINCIPLES.md`
 - `docs/SETUP_LOG.md`
 
-No implementation artifacts are approved by this document.
+No remote implementation or publication is approved by this document. Local validation artifacts may now be created under the approved source contract.

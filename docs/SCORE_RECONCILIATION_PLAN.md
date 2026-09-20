@@ -1,7 +1,7 @@
 # Score Reconciliation Plan
 
 Date: 2026-09-03
-Status: Planning only
+Status: Approved execution plan under the source contract
 
 ## Objective
 

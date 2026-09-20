@@ -14,12 +14,14 @@ This project evaluates the Flexential End of Life and Site Risk workbook as a po
 - Fabric workspace: `NextField-EOL-Dev`
 - Remote writes: not approved or performed
 
-## Open Decisions
+## Approved Decisions and Remaining Gates
 
 - Current PoC source: the Excel workbook is the only available source and is treated as the source of record.
 - Future source strategy: CMMS/EAM is presumed as the eventual operational source; Dataverse remains a future integration option.
 - Semantic model: the supplied TMDL is a derived proposal and requires direct workbook validation.
-- KPI reconciliation: resolve the relationship between the 70-site count and approximately 9,070 asset/equipment rows.
+- KPI reconciliation: use bounded valid rows and distinct business keys; report site, asset, equipment-row, and scored-row measures separately.
+- Row boundaries: exclude workbook metadata, explanatory footers, padded rows, zero-ID rows, and other non-business records from governed measures.
+- Remaining gates: validate score lineage, normalize and reconcile SPOF coverage, validate the local model, then obtain explicit publication approval.
 
 ## Project Areas
 

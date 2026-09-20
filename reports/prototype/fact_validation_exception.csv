@@ -1,0 +1,44 @@
+ExceptionType,BusinessKey,SiteNo,SourceSheet,SourceRowNumber,Details
+TestRecord,7057,Not Used,Entry- Eq Database,6340,Excluded from governed portfolio measures
+UnmappedSite,7057,Not Used,Entry- Eq Database,6340,Asset site key is not in source site master
+RestoredSiteScoreContext,3270,SLC05,Output- Asset Scores,443,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3271,SLC05,Output- Asset Scores,444,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3570,SLC05,Output- Asset Scores,485,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3571,SLC05,Output- Asset Scores,486,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,6248,SLC05,Output- Asset Scores,2032,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,6249,SLC05,Output- Asset Scores,2033,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,6250,SLC05,Output- Asset Scores,2034,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,6251,SLC05,Output- Asset Scores,2035,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,6880,SLC05,Output- Asset Scores,2399,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,6881,SLC05,Output- Asset Scores,2400,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,6882,SLC05,Output- Asset Scores,2401,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,6883,SLC05,Output- Asset Scores,2402,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,797,SLC05,Output- Asset Scores,7452,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,798,SLC05,Output- Asset Scores,7453,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,1081,SLC05,Output- Asset Scores,8306,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,1082,SLC05,Output- Asset Scores,8307,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,1087,SLC05,Output- Asset Scores,8308,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,1088,SLC05,Output- Asset Scores,8309,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,1660,SLC05,Output- Asset Scores,8711,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,1661,SLC05,Output- Asset Scores,8712,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3267,SLC05,Output- Asset Scores,9215,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3269,SLC05,Output- Asset Scores,9216,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,348,SLC05,Output- Asset Scores,9936,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,349,SLC05,Output- Asset Scores,9937,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,6247,SLC05,Output- Asset Scores,9940,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,394,SLC05,Output- Asset Scores,9974,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3254,SLC05,Output- Asset Scores,9993,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3255,SLC05,Output- Asset Scores,9994,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3256,SLC05,Output- Asset Scores,9995,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3257,SLC05,Output- Asset Scores,9996,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3258,SLC05,Output- Asset Scores,9997,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3259,SLC05,Output- Asset Scores,9998,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3260,SLC05,Output- Asset Scores,9999,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3261,SLC05,Output- Asset Scores,10000,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3262,SLC05,Output- Asset Scores,10001,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3263,SLC05,Output- Asset Scores,10002,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3264,SLC05,Output- Asset Scores,10003,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,3265,SLC05,Output- Asset Scores,10004,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,6246,SLC05,Output- Asset Scores,10057,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,1684,SLC05,Output- Asset Scores,10164,Score retained; site restored from asset evidence
+RestoredSiteScoreContext,1685,SLC05,Output- Asset Scores,10165,Score retained; site restored from asset evidence

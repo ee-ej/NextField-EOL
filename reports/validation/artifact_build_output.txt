@@ -1,0 +1,349 @@
+{
+  "workbook": "C:\\Dev\\NextField\\NextField-EOL\\source\\Flex Asset EOL and Site Risk Evaluation Tool Ver 3.0 3.6.25.xlsx",
+  "validity_rules": {
+    "asset": "numeric AssetId greater than zero",
+    "site": "nonblank site code matching the approved site-code pattern",
+    "output": "valid nonzero business key; output rows are derived facts"
+  },
+  "kpis": {
+    "sites_in_portfolio_source": 66,
+    "sites_in_portfolio_with_restored_slc05": 67,
+    "assets_in_source": 9065,
+    "equipment_rows": 9065,
+    "scored_assets": 9065,
+    "scored_rows_with_site_context": 9023,
+    "source_assets_absent_from_scored_output": []
+  },
+  "restored_sites": [
+    {
+      "SiteNo": "SLC05",
+      "SiteId": "143",
+      "SiteName": "Salt Lake City-Cottonwood",
+      "Ownership": "",
+      "AssetClass": "",
+      "Gen": "",
+      "EBITDA": "",
+      "SourceSheet": "Entry- Eq Database",
+      "SourceEvidence": "41 asset rows",
+      "RestorationStatus": "RestoredFromAssetEvidence",
+      "NeedsSMEReview": "true"
+    }
+  ],
+  "tables": {
+    "Entry- Site Data": {
+      "header_row": 20,
+      "first_valid_row": 21,
+      "last_valid_row": 86,
+      "valid_row_count": 66,
+      "distinct_key_count": 66,
+      "duplicate_keys": {},
+      "excluded_row_count": 40,
+      "used_range_max_row": 126
+    },
+    "Entry- Eq Database": {
+      "header_row": 21,
+      "first_valid_row": 22,
+      "last_valid_row": 9086,
+      "valid_row_count": 9065,
+      "distinct_key_count": 9065,
+      "duplicate_keys": {},
+      "excluded_row_count": 958,
+      "used_range_max_row": 10044
+    },
+    "Output- Asset Scores": {
+      "header_row": 16,
+      "first_valid_row": 17,
+      "last_valid_row": 10296,
+      "valid_row_count": 9065,
+      "distinct_key_count": 9065,
+      "duplicate_keys": {},
+      "excluded_row_count": 1472,
+      "used_range_max_row": 10553
+    },
+    "Output- Site Scores": {
+      "header_row": 13,
+      "first_valid_row": 14,
+      "last_valid_row": 80,
+      "valid_row_count": 66,
+      "distinct_key_count": 66,
+      "duplicate_keys": {},
+      "excluded_row_count": 25,
+      "used_range_max_row": 104
+    },
+    "Output- Site Risk Scores": {
+      "header_row": 13,
+      "first_valid_row": 15,
+      "last_valid_row": 80,
+      "valid_row_count": 66,
+      "distinct_key_count": 66,
+      "duplicate_keys": {},
+      "excluded_row_count": 25,
+      "used_range_max_row": 104
+    }
+  },
+  "reconciliation": {
+    "sites_missing_from_site_scores": [],
+    "sites_missing_from_site_risk_scores": [],
+    "sites_missing_from_spof_groups": [],
+    "restored_site_missing_from_site_scores": [
+      "SLC05"
+    ],
+    "restored_site_missing_from_site_risk_scores": [
+      "SLC05"
+    ],
+    "restored_site_missing_from_spof_groups": [
+      "SLC05"
+    ],
+    "scored_rows_without_valid_site_context": [
+      {
+        "asset_id": "3270",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3271",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3570",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3571",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "6248",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "6249",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "6250",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "6251",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "6880",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "6881",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "6882",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "6883",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "797",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "798",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "1081",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "1082",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "1087",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "1088",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "1660",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "1661",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3267",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3269",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "348",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "349",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "6247",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "394",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3254",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3255",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3256",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3257",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3258",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3259",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3260",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3261",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3262",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3263",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3264",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "3265",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "6246",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "7057",
+        "site_no": "Not"
+      },
+      {
+        "asset_id": "1684",
+        "site_no": "SLC05"
+      },
+      {
+        "asset_id": "1685",
+        "site_no": "SLC05"
+      }
+    ]
+  },
+  "spof": {
+    "group_row": 24,
+    "question_start_row": 30,
+    "group_count": 66,
+    "question_count": 62,
+    "observation_count": 4092,
+    "group_sites": [
+      "ABE01",
+      "ATL01",
+      "ATL02",
+      "ATL03",
+      "ATL04",
+      "ATL05",
+      "CIN01",
+      "CIN02",
+      "CLT01",
+      "CLT02",
+      "CLT03",
+      "CLT04",
+      "CLT05",
+      "DAL01",
+      "DAL02",
+      "DAL03",
+      "DAL04",
+      "DAL05",
+      "DEN02",
+      "DEN03",
+      "DEN05.01",
+      "DEN05.02",
+      "DEN11",
+      "DFW01",
+      "FLL01",
+      "FLL02",
+      "JAX01",
+      "JAX02",
+      "LAS03",
+      "LAS04",
+      "LAS05",
+      "LOU02",
+      "LOU03",
+      "LOU04",
+      "LOU05",
+      "MSP01",
+      "NAS01",
+      "NAS02",
+      "NAS03",
+      "NAS04",
+      "NAS05",
+      "NAS06",
+      "PDX01.01",
+      "PDX01.02",
+      "PDX02",
+      "PDX03",
+      "PDX04",
+      "PHL01",
+      "PHX01",
+      "RAL01",
+      "RAL02",
+      "RAL03",
+      "RCH01",
+      "RIC01",
+      "RIC02",
+      "SLC03",
+      "SLC04.01",
+      "SLC04.02",
+      "SLC04.03",
+      "SLC07",
+      "SLC09",
+      "SLC10",
+      "TPA01",
+      "TPA02",
+      "TPA03",
+      "TPA04"
+    ],
+    "status_counts": {
+      "Valid": 3757,
+      "MultipleAnswers": 4,
+      "Blank": 331
+    }
+  }
+}
+Wrote artifacts to C:\Dev\NextField\NextField-EOL\reports\validation

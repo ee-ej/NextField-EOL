@@ -1,0 +1,41 @@
+table FactValidationException
+
+	/// Count of recorded validation exceptions, including restored-site context and test records.
+	measure 'Validation Exception Count' = COUNTROWS(FactValidationException)
+		formatString: #,0
+		displayFolder: 3 Validation
+		lineageTag: 2be8ceca-229e-436e-8dcb-687047c6966e
+
+	column ExceptionType
+		dataType: string
+		summarizeBy: none
+
+	column BusinessKey
+		dataType: string
+		summarizeBy: none
+
+	column SiteNo
+		dataType: string
+		summarizeBy: none
+
+	column SourceSheet
+		dataType: string
+		summarizeBy: none
+
+	column SourceRowNumber
+		dataType: int64
+		summarizeBy: none
+
+	column Details
+		dataType: string
+		summarizeBy: none
+
+	partition FactValidationException = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Dev\NextField\NextField-EOL\reports\prototype\fact_validation_exception.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    Promoted
+

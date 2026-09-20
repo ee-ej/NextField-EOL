@@ -17,7 +17,7 @@ The working project baseline is now stabilized and grounded in the actual workbo
 
 ### Confirmed working facts
 
-- The workbook contains an approximate portfolio base of 70 sites and 9,070 equipment rows.
+- The initial workbook estimate was 70 sites and 9,070 equipment rows; the approved typed boundary currently yields 66 valid sites and 9,065 valid assets.
 - The model proposal explicitly references a 9-criteria weighted score and a size exponent of 0.8.
 - The workbook evidence shows the SPOF input is stored in a transposed matrix format rather than in normalized long-form rows.
 - The output layers are not yet direct 1:1 reconciliations of the entry population; row boundaries and zero-padding rows must be filtered out explicitly.
@@ -37,7 +37,7 @@ The working project baseline is now stabilized and grounded in the actual workbo
 | Step 0: Source orientation | Done | Source docs reviewed and the core model assumptions were restated and validated against project evidence. |
 | Step 1: Tooling and MCP verification | Done | Node.js and Copilot CLI were verified; Power BI authoring component installed; Power BI Modeling MCP responded. |
 | Step 2: Workspace scaffolding | In place | Repository structure exists and remains technology-neutral until the source model is confirmed. |
-| Step 3: Model validation against workbook | Blocked pending workbook-to-model reconciliation | The TMDL is plausible but not yet accepted as the governing contract until the row boundaries, threshold logic, and output mappings are validated. |
+| Step 3: Model validation against workbook | Ready to begin locally | The source-to-model contract and row-boundary rules are approved; formula lineage and output mappings still require execution validation. |
 | Step 4: Fabric/Power BI target confirmation | Needs decision | The intended remote workspace and write permissions must be confirmed before any remote fabric actions are taken. |
 
 ## Immediate next actions
@@ -48,7 +48,7 @@ The working project baseline is now stabilized and grounded in the actual workbo
 
 2. Reconcile the KPI definition before modeling
    - Define whether the business metric is based on input rows, scored rows, distinct assets, distinct sites, or output rows.
-   - Resolve the mismatch between 70 sites and the 9,070 equipment base and document the approved rule.
+   - Preserve the 66-site and 9,065-asset execution counts, and document the excluded narrative rows and any orphaned site references.
 
 3. Normalize the SPOF matrix into a governed long-form table
    - Preserve question text, site reference, answer, comments, and source location.
@@ -62,18 +62,18 @@ The working project baseline is now stabilized and grounded in the actual workbo
    - Choose the intended Fabric workspace and permission path.
    - Avoid remote writes until that target is explicitly approved.
 
-## Top decisions required
+## Decisions now approved
 
-1. Source of record for the productionized model
+1. Source of record for the current PoC
    - Current PoC source: Excel workbook
    - Future source assumption: CMMS/EAM, with Dataverse as a later integration option
 
-2. KPI reconciliation rule
-   - Decide which count is the business truth for the portfolio and how the workbook output rows, distinct asset rows, and site rows are treated.
+2. KPI and row-boundary basis
+   - Use bounded valid source rows and distinct business keys for portfolio counts; treat output rows as derived and exclude padded, zero-ID, and explanatory rows.
 
 3. Exact Fabric or Power BI write target
-   - Identify the workspace to receive the validated semantic model and downstream reporting assets.
+   - The candidate workspace remains `NextField-EOL-Dev`; publication still requires explicit confirmation at implementation time.
 
 ## Recommended working posture
 
-The project should remain in a read-only validation mode until the workbook-derived rules are explicit. The evidence currently supports a controlled, workbook-first build path: confirm the row boundaries, normalize the SPOF matrix, validate the score logic, then implement the semantic model and reporting artifacts in the approved target workspace.
+The project may now proceed to local, workbook-first transformation and reconciliation work under the approved contract. Remote Fabric writes remain gated until score logic, SPOF normalization, and local model validation are complete.

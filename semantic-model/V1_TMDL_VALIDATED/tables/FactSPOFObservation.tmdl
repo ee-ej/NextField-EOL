@@ -1,0 +1,77 @@
+table FactSPOFObservation
+
+	/// Count of normalized site/question SPOF observations, including blank and multiple-answer statuses.
+	measure 'SPOF Observation Count' = COUNTROWS(FactSPOFObservation)
+		formatString: #,0
+		displayFolder: 1 Risk
+		lineageTag: 86ada937-744b-42c6-b09c-f97b7cc50f0a
+
+	/// Count of normalized SPOF observations with exactly one selected answer.
+	measure 'Valid SPOF Observation Count' = CALCULATE(COUNTROWS(FactSPOFObservation), FactSPOFObservation[ValidationStatus] = "Valid")
+		formatString: #,0
+		displayFolder: 3 Validation
+		lineageTag: 1671c272-12c6-4ce5-b056-e64392e4f49c
+
+	/// Count of normalized SPOF observations with no selected answer marker.
+	measure 'Blank SPOF Observation Count' = CALCULATE(COUNTROWS(FactSPOFObservation), FactSPOFObservation[ValidationStatus] = "Blank")
+		formatString: #,0
+		displayFolder: 3 Validation
+		lineageTag: caddb39c-5dd0-4ff1-a003-4c797e273f6e
+
+	/// Count of normalized SPOF observations with multiple selected answer markers.
+	measure 'Multiple Answer SPOF Count' = CALCULATE(COUNTROWS(FactSPOFObservation), FactSPOFObservation[ValidationStatus] = "MultipleAnswers")
+		formatString: #,0
+		displayFolder: 3 Validation
+		lineageTag: 48f1b00a-87d3-47a5-af14-ebc15563c83d
+
+	/// Share of normalized SPOF observations with exactly one selected answer.
+	measure 'SPOF Answer Completeness' = DIVIDE([Valid SPOF Observation Count], [SPOF Observation Count])
+		formatString: 0.0%
+		displayFolder: 3 Validation
+		lineageTag: 3a9146e2-c2ef-4993-a291-1d5ea213de3e
+
+	column SiteNo
+		dataType: string
+		summarizeBy: none
+
+	column SPOFQuestionId
+		dataType: string
+		summarizeBy: none
+
+	column AnswerValue
+		dataType: string
+		summarizeBy: none
+
+	column OriginalMarker
+		dataType: string
+		summarizeBy: none
+
+	column DetailedComments
+		dataType: string
+		summarizeBy: none
+
+	column SourceRowNumber
+		dataType: int64
+		summarizeBy: none
+
+	column SourceColumnStart
+		dataType: int64
+		summarizeBy: none
+
+	column SourceColumnEnd
+		dataType: int64
+		summarizeBy: none
+
+	column ValidationStatus
+		dataType: string
+		summarizeBy: none
+
+	partition FactSPOFObservation = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Dev\NextField\NextField-EOL\reports\prototype\fact_spof_observation.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    Promoted
+
